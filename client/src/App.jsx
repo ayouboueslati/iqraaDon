@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
+import TransparencyDashboard from './pages/TransparencyDashboard';
 import { Sidebar, Navbar } from './components';
 import { CampaignDetails, CreateCampaign, Home, Profile } from './pages';
 
@@ -15,11 +15,13 @@ const App = () => {
         <Navbar />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/create-campaign" element={<CreateCampaign />} />
-          <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-        </Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/profile" element={<Profile />} />
+  <Route path="/create-campaign" element={<CreateCampaign />} />
+  <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+  <Route path="/dashboard" element={<TransparencyDashboard />} />  // Ensure it's correctly added
+</Routes>
+
       </div>
     </div>
   )

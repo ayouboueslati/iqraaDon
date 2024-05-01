@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { ethers } from 'ethers';
 
 import { useStateContext } from '../context';
@@ -7,17 +8,19 @@ import { money } from '../assets';
 import { CustomButton, FormField, Loader } from '../components';
 import { checkIfImage } from '../utils';
 
+
+
 const CreateCampaign = () => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const { createCampaign } = useStateContext();
+  const navigate = useNavigate(); // Navigation after form submission
+  const [isLoading, setIsLoading] = useState(false); // Loading state for the submit action
+  const { createCampaign } = useStateContext(); // Get the createCampaign function from context
   const [form, setForm] = useState({
-    name: '',
+    userEmail: '',
     title: '',
-    description: '',
-    target: '', 
+    target: '',
     deadline: '',
-    image: ''
+    image: '',
+    description: '',
   });
 
   const handleFormFieldChange = (fieldName, e) => {
@@ -25,20 +28,30 @@ const CreateCampaign = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
+    setIsLoading(true); // Show loading indicator while processing the request
 
-    checkIfImage(form.image, async (exists) => {
-      if(exists) {
-        setIsLoading(true)
-        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
-        setIsLoading(false);
-        navigate('/');
-      } else {
-        alert('Provide valid image URL')
-        setForm({ ...form, image: '' });
-      }
-    })
-  }
+    
+
+      checkIfImage(form.image, async (exists) => {
+        if (exists) {
+          await createCampaign({
+            title: form.title,
+            target: ethers.utils.parseUnits(form.target, 18),
+            deadline: new Date(form.deadline).getTime(),
+            image: form.image,
+            description: form.description,
+          });
+
+          setIsLoading(false);
+          navigate('/'); // Redirect to another page after successful creation
+        } else {
+          alert('Invalid image URL');
+          setIsLoading(false);
+        }
+      });
+   
+  };
 
   return (
     <div className="bg-[#1c1c24] flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4">
@@ -49,13 +62,13 @@ const CreateCampaign = () => {
 
       <form onSubmit={handleSubmit} className="w-full mt-[65px] flex flex-col gap-[30px]">
         <div className="flex flex-wrap gap-[40px]">
-          <FormField 
-            labelName="Your Name *"
-            placeholder="John Doe"
-            inputType="text"
-            value={form.name}
-            handleChange={(e) => handleFormFieldChange('name', e)}
-          />
+          <FormField
+          labelName="Your Email"
+          inputType="email"
+          placeholder="Enter your email address"
+          value={form.userEmail}
+          handleChange={(e) => handleFormFieldChange('userEmail', e)}
+        />
           <FormField 
             labelName="Campaign Title *"
             placeholder="Write a title"
