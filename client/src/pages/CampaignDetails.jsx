@@ -36,6 +36,7 @@ const CampaignDetails = () => {
 
   // Handle donation
   const handleDonate = async () => {
+    setIsLoading(true);  // Set loading state
     try {
       await donate(state.pId, amount);  // Donate to the campaign
       navigate('/');  // Redirect after donation
