@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import TransparencyDashboard from './pages/TransparencyDashboard';
 import { Sidebar, Navbar } from './components';
 import { CampaignDetails, CreateCampaign, Home, Profile } from './pages';
-
+import DonateToCharity from './pages/DonateToCharity';
 const App = () => {
   return (
     <div className="relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
@@ -19,7 +19,8 @@ const App = () => {
   <Route path="/profile" element={<Profile />} />
   <Route path="/create-campaign" element={<CreateCampaign />} />
   <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-  <Route path="/dashboard" element={<TransparencyDashboard />} />  // Ensure it's correctly added
+  <Route path="/dashboard" element={<TransparencyDashboard />} />
+  <Route path="/donate-to-charity" element={<DonateToCharity />} /> 
 </Routes>
 
       </div>

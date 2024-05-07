@@ -11,9 +11,9 @@ import { checkIfImage } from '../utils';
 
 
 const CreateCampaign = () => {
-  const navigate = useNavigate(); // Navigation after form submission
-  const [isLoading, setIsLoading] = useState(false); // Loading state for the submit action
-  const { createCampaign } = useStateContext(); // Get the createCampaign function from context
+  const navigate = useNavigate(); 
+  const [isLoading, setIsLoading] = useState(false); 
+  const { createCampaign } = useStateContext(); 
   const [form, setForm] = useState({
     userEmail: '',
     title: '',
@@ -28,8 +28,8 @@ const CreateCampaign = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setIsLoading(true); // Show loading indicator while processing the request
+    e.preventDefault(); 
+    setIsLoading(true); 
 
     
 
@@ -44,7 +44,7 @@ const CreateCampaign = () => {
           });
 
           setIsLoading(false);
-          navigate('/'); // Redirect to another page after successful creation
+          navigate('/'); 
         } else {
           alert('Invalid image URL');
           setIsLoading(false);

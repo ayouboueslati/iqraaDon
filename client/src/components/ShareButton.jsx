@@ -9,7 +9,7 @@ import {
 const ShareButton = ({ campaign }) => {
   const currentUrl = window.location.href;  // Get current page URL
   const encodedUrl = encodeURIComponent(currentUrl);  // Properly encode the URL
-  const shareText = `Check out this campaign: ${campaign.title}`;
+  const shareText = `Support "${campaign.title}"! Help us reach our goal `;
 
   if (!currentUrl || !currentUrl.startsWith("http")) {
     console.error("Invalid URL:", currentUrl);
@@ -27,14 +27,7 @@ const ShareButton = ({ campaign }) => {
         <TwitterIcon size={32} round />
       </TwitterShareButton>
 
-      {/* Facebook Sharing */}
-      <FacebookShareButton
-        url={encodedUrl}  // Use encoded URL to ensure valid format
-        quote={shareText}
-        hashtag="#Crowdfunding"
-      >
-        <FacebookIcon size={32} round />
-      </FacebookShareButton>
+     
     </div>
   );
 };

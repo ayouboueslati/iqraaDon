@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import { Link } from 'react-router-dom'; 
 import { DisplayCampaigns } from '../components';
 import { useStateContext } from '../context'
 
@@ -21,12 +21,13 @@ const Profile = () => {
   }, [address, contract]);
 
   return (
-    <DisplayCampaigns 
-      title="User Campaigns"
-      isLoading={isLoading}
-      campaigns={campaigns}
-    />
-  )
+    <div>
+      <DisplayCampaigns 
+        isLoading={isLoading} 
+        campaigns={campaigns} 
+      />
+    </div>
+  );
 }
 
 export default Profile
